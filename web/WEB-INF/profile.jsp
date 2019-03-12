@@ -1,3 +1,9 @@
+<%@ page import="com.all.Profile2" %>
+<% Profile2 data =  (Profile2)request.getAttribute("data");
+//out.println(data.firstname);
+%>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="img/favicon.png" type="image/png">
-    <title>MeetMe Personal</title>
+    <title>MeetMe ${name}</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="vendors/linericon/style.css">
@@ -75,19 +81,19 @@
                     <div class="media-body">
                         <div class="personal_text">
                             <h6>Hello Everybody, i am</h6>
-                            <h3>Donald McKinney</h3>
-                            <h4>Junior UI/UX Developer</h4>
+                            <h3><%=data.getFirstname()%> <%=data.getLastname()%></h3>
+                            <h4><%=data.getWork()%></h4>
                             <p>You will begin to realise why this exercise is called the Dickens Pattern (with reference to the ghost showing Scrooge some different futures)</p>
                             <ul class="list basic_info">
-                                <li><a href="#"><i class="lnr lnr-calendar-full"></i> 31st December, 1992</a></li>
-                                <li><a href="#"><i class="lnr lnr-phone-handset"></i> 44 (012) 6954 783</a></li>
-                                <li><a href="#"><i class="lnr lnr-envelope"></i> businessplan@donald</a></li>
-                                <li><a href="#"><i class="lnr lnr-home"></i> Santa monica bullevard</a></li>
+                                <li><a href="#"><i class="lnr lnr-calendar-full"></i> 31/52</a></li>
+                                <li><a href="#"><i class="lnr lnr-phone-handset"></i> <%=data.getPhone()%></a></li>
+                                <li><a href="#"><i class="lnr lnr-envelope"></i> <%=data.getEmail()%></a></li>
+                                <li><a href="#"><i class="lnr lnr-home"></i> <%=data.getAddress()%></a></li>
                             </ul>
                             <ul class="list personal_social">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="<%=data.getFacebook()%>"><i class="fa fa-facebook"></i></a></li>
+                                <%--<li><a href="<%=data.getLastname()%>"><i class="fa fa-twitter"></i></a></li>--%>
+                                <li><a href="<%=data.getLinkedin()%>"><i class="fa fa-linkedin"></i></a></li>
                             </ul>
                         </div>
                     </div>

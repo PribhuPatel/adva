@@ -1,10 +1,10 @@
 package com.priyank;
 
+import com.all.DbCon;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import javax.xml.transform.Result;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,37 +17,30 @@ public class login extends HttpServlet {
         String username = request.getParameter("username").toString();
         String password = request.getParameter("password").toString();
 
-        Connection connection;
         Statement stmt;
         ResultSet resultSet;
-//         String query;
         PrintWriter out  = response.getWriter();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jsp", "root", "");
-//            String query = "SELECT * FROM login where username=?";
-            PreparedStatement a = connection.prepareStatement("SELECT * FROM login where username=? and password=?");
-//
+            Connection connection= DbCon.getCon();
+            PreparedStatement a = connection.prepareStatement("SELECT * FROM users where username=? and password=?");
+
             a.setString(1,username);
             a.setString(2,password);
-//
+
 
             ResultSet b= a.executeQuery();
-//            String pass="";
-//            System.out.println(b.next());
-//            while ( b.next() ) {
-//                pass = b.getString("password");
-//                System.out.println(pass);
 
-//            }
-//            System.out.println(b.next());
             if(b.next()){
-                out.print("Done");
-//                out.print(resultSet);
-//            out.print("Welcome "+username);
+                Cookie cookie = new Cookie("username",username);
+//                cookie.setMaxAge();
+//                cookie.setDomain("");
+                response.addCookie(cookie);
+//                HttpSession session = request.getSession();
+//                session.setAttribute("username",username);
+                response.sendRedirect("profile");
             } else {
-                out.print("Sorry");
+                out.println("Go ahead");
             }
         } catch(Exception e) {
             out.print(e);
